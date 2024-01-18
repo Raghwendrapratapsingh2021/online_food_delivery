@@ -39,13 +39,13 @@ setUserName(data.name);
 return (
 
  <Provider   store={appStore }  >
-<UserContext.Provider value={{loggedInUser:userName, setUserName}}> 
-<div>
-<Header/>
-<Outlet/>
-<Footer/>
-</div>
-</UserContext.Provider>
+         <UserContext.Provider value={{loggedInUser:userName, setUserName}}> 
+               <div>
+                     <Header/>
+                     <Outlet/>
+                     <Footer/>
+               </div>
+         </UserContext.Provider>
 </Provider>
 )
 };

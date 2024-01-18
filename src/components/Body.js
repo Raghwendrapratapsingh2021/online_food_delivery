@@ -1,5 +1,5 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utills/mockData"
+import resList, { mockData } from "../utills/mockData"
 import { useState,useEffect ,useContext} from "react";
 import Shimmer from "./Shimmer";
 import {Link} from "react-router-dom"
@@ -13,7 +13,7 @@ const Body = ()=>{
    const [listOfRestaurants, setlistOfRestaurant ]= useState([]);
    const [filteredRestaurant,setfilteredRestaurant]=useState([]);
    const [searchTxt, setsearchTxt]=useState("");
-   // const [isLoading, setIsLoading] = useState(true);
+   
 
    
    
@@ -24,43 +24,20 @@ const Body = ()=>{
     },[]);
 
    const fetchData=async()=>{
-    const data= await fetch(
-      "https://www.swiggy.com/mapi/homepage/getCards?lat=28.632957&lng=77.219385 "
-    );
-   const json = await (data.json());
-   
-   console.log(json.data);
-   //console.log(json?.data.success.cards[0]?card?.card?.imageGridCards?.info); 
-  // console.log(json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
-    //optional chaining
+    const data=await fetch(
+      "https://www.swiggy.com/mapi/homepage/getCards?lat=28.632957&lng=77.219385 " 
+        
+      );
+    
+    const json = await data.json();
+    console.log(json.data);
+  
+  //optional chaining
    setlistOfRestaurant(json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
    setfilteredRestaurant(json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
-  
-     
+      
 };
-
-
-//   useEffect(() => {
-//     async function fetchData() {
-//       try {
-//         const response = await fetch(
-//           'https://www.swiggy.com/mapi/homepage/getCards?lat=28.632957&lng=77.219385'
-//         );
-//         if (!response.ok) {
-//           throw new Error(`HTTP error! status: ${response.status}`);
-//         }
-//         const json = await response.json();
-//         setlistOfRestaurant(json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants || []);
-//         setfilteredRestaurant(json?.data?.success?.cards[4]?.gridWidget?.gridElements?.infoWithStyle?.restaurants || []);
-//       } catch (error) {
-//         console.error('Fetching data error:', error);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     }
-
-//     fetchData();
-//   }, []);
+ 
 
 
 

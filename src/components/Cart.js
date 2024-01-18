@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import {clearCart}   from "../utills/cartSlice"
+import {clearCart, removeItem}   from "../utills/cartSlice"
 import ItemList from "./ItemList";
 import {useDispatch} from "react-redux";
 
@@ -15,10 +15,11 @@ const Cart=()=>{
 
  const dispatch=useDispatch();
  const handleClearCart=()=>{
-
  dispatch(clearCart());
+ }
 
-
+ const handleRemoveItem=()=>{
+  dispatch(removeItem());
  }
 
 return (
@@ -33,7 +34,12 @@ return (
    {cartItems.length===0 &&( 
     <h1>Cart is empty, Add Items to the cart🤣!!!</h1>
    )}
-    <ItemList  items={cartItems}/>
+  
+   <button className="p-2 m-2 bg-yellow-600 text-center rounded-lg text-white"  onClick={
+    handleRemoveItem
+   }> Remove Item</button>
+
+       <ItemList  items={cartItems}/>
   </div>
 
 </div>
